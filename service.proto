@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package dictonary;
+
+service DictionaryService {
+        rpc GetDictionary(Empty) returns (PickledData);
+}
+
+service ObjectService {
+	rpc GetObject(Empty) returns (PickledData);
+}
+
+message Empty {}
+
+message PickledData {
+        bytes data = 1;
+}
+
