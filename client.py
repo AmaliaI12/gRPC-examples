@@ -1,5 +1,7 @@
 import pickle
 import grpc
+import numpy
+from datetime import datetime
 
 from grpc_tests.protos import service_pb2, service_pb2_grpc
 
@@ -15,7 +17,9 @@ def run():
     data = pickle.loads(response.data)
     
 
-    print("Recieved: ", data.r, " ", data.i)
-
+    print("Recieved: ")
+    print("Complex: ", data["complex"].r, data["complex"].i)
+    print("Date: ", data["date"])
+    print("Array: ", data["array"])
 if __name__ == '__main__':
     run()

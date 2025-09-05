@@ -1,6 +1,9 @@
 import pickle
 import grpc
 
+from datetime import datetime
+import numpy as np
+
 from concurrent import futures
 from grpc_tests.protos import service_pb2, service_pb2_grpc
 from .complex_num import Complex
@@ -14,10 +17,19 @@ class DictionaryService (service_pb2_grpc.DictionaryServiceServicer):
 
 class ObjectService (service_pb2_grpc.ObjectServiceServicer):
     def GetObject(self, request, context):
+
         obj = Complex(3.0, -4.5)
         print("Complex number: ", obj.r, " ", obj.i)
-        pickled_data = pickle.dumps(obj)
-        print("Returning the pickled object")
+
+        now = datetime.now()
+
+        arr = np.array([9,8,7,6,5,4,3,2,1,0])
+
+        data = {"complex":obj,"date": now, "array": arr }
+
+
+        pickled_data = pickle.dumps(data)
+        print("Returning the pickled objects")
         return service_pb2.PickledData(data=pickled_data)
 
 
