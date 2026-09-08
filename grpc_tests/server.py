@@ -28,7 +28,7 @@ class ObjectService (service_pb2_grpc.ObjectServiceServicer):
         data = {"complex":obj,"date": now, "array": arr }
 
 
-        pickled_data = pickle.dumps(data)
+        pickled_data = pickle.dumps(obj)
         print("Returning the pickled objects")
         return service_pb2.PickledData(data=pickled_data)
 
